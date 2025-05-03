@@ -1,10 +1,15 @@
 import os
 import sys
 import importlib
+from typing import TYPE_CHECKING
 
 import bpy
 from bpy.app import handlers
 from bpy.app.handlers import persistent
+
+if TYPE_CHECKING:
+    import reports
+    import subscriptions
 
 # Local imports implemented to support Blender refreshes
 modulesNames = ("reports", "subscriptions")

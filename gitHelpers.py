@@ -1,6 +1,7 @@
 import os
 from datetime import datetime, timezone, timedelta
 from unicodedata import name
+from typing import Any
 
 import pygit2 as git
 from pygit2._pygit2 import GitError
@@ -58,7 +59,7 @@ def getLastModifiedStr(date):
     return output
 
 
-def commit(repo, message):
+def commit(repo: git.Repository, message: str) -> None:
     """Add all and commit changes to current branch"""
 
     # Add all
@@ -89,7 +90,7 @@ def commit(repo, message):
     )
 
 
-def getCommits(repo):
+def getCommits(repo: git.Repository) -> list[dict[str, Any]]:
     """Returns a list commit objects"""
 
     commits = []
@@ -132,7 +133,7 @@ def makeGitIgnore(path):
     with open(os.path.join(path, ".gitignore"), "w") as file:
         file.write(content)
 
-def configUser(repo, name, email):
+def configUser(repo: git.Repository, name: str, email: str) -> None:
     """Set user.name and user.email to the given Repo object"""
 
     repo.config["User.name"] = name

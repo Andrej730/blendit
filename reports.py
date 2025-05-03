@@ -1,7 +1,7 @@
 import bpy
 
 
-def getReports():
+def getReports() -> list[str]:
     """Returns a list of reports as seen in the Info area"""
     
     window = bpy.context.window_manager.windows[0]
@@ -25,7 +25,7 @@ def getReports():
     return reports.splitlines()
 
 
-def ignoreReport(report):
+def ignoreReport(report) -> bool:
     """Returns True if report should be ignored, else False"""
 
     ignoreReportList = [
@@ -39,11 +39,11 @@ def ignoreReport(report):
     return False
 
 
-def getCommands():
+def getCommands() -> list[str]:
     """Extract executable commands from reports"""
 
     reports = getReports()
-    commands = []
+    commands: list[str] = []
     for i in range(len(reports)):
         report = reports[i]
         if (report.startswith("Deleted") and
@@ -65,7 +65,7 @@ def getCommands():
     return commands
 
 
-def clearReports():
+def clearReports() -> None:
     """Clears reports seen in the Info area"""
 
     window = bpy.context.window_manager.windows[-1]

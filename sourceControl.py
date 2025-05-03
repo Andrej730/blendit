@@ -1,6 +1,7 @@
 import os
 import sys
 import importlib
+from typing import TYPE_CHECKING
 
 import bpy
 from bpy.types import Operator
@@ -9,6 +10,10 @@ from bpy.props import StringProperty
 import pygit2 as git
 from pygit2._pygit2 import GitError
 from pygit2 import GIT_RESET_SOFT, GIT_RESET_HARD
+
+if TYPE_CHECKING:
+    import gitHelpers
+    import openProject
 
 # Local imports implemented to support Blender refreshes
 modulesNames = ("gitHelpers", "openProject")

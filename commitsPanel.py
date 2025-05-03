@@ -1,6 +1,7 @@
 import sys
 import importlib
 from datetime import datetime
+from typing import TYPE_CHECKING
 
 import bpy
 from bpy.types import Panel, PropertyGroup, UIList
@@ -9,6 +10,11 @@ from bpy.props import (CollectionProperty, EnumProperty, IntProperty,
 
 import pygit2 as git
 from pygit2._pygit2 import GitError
+
+if TYPE_CHECKING:
+    import gitHelpers
+    import openProject
+    import sourceControl
 
 # Local imports implemented to support Blender refreshes
 modulesNames = ("gitHelpers", "openProject", "sourceControl")

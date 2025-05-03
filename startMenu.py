@@ -1,7 +1,12 @@
 import sys
 import importlib
+from typing import TYPE_CHECKING
 
 import bpy
+
+if TYPE_CHECKING:
+    import newProject
+    import openProject
 
 # Local imports implemented to support Blender refreshes
 modulesNames = ("newProject", "openProject")

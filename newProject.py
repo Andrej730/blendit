@@ -1,12 +1,17 @@
 import os
 import sys
 import importlib
+from typing import TYPE_CHECKING
 
 import bpy
 from bpy_extras.io_utils import ExportHelper
 from bpy.props import StringProperty
 
 import pygit2 as git
+
+if TYPE_CHECKING:
+    import gitHelpers
+    import reports
 
 # Local imports implemented to support Blender refreshes
 modulesNames = ("gitHelpers", "reports")
