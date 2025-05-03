@@ -95,13 +95,13 @@ def getCommits(repo: git.Repository) -> list[dict[str, Any]]:
 
     commits = []
     last = repo[repo.head.target]
-    for commit in repo.walk(last.id, git.GIT_SORT_TIME):
+    for commit in repo.walk(last.id, git.enums.SortMode.TIME):
         timezoneInfo = timezone(timedelta(minutes=commit.author.offset))
         datetimeString = datetime.fromtimestamp(float(commit.author.time), 
                                     timezoneInfo).strftime(GIT_TIME_FORMAT)
 
         commitDict = {}
-        commitDict["id"] = commit.hex
+        commitDict["id"] = str(commit.id)
         commitDict["name"] = commit.author.name
         commitDict["email"] = commit.author.email
         commitDict["date"] = datetimeString

@@ -90,7 +90,7 @@ class BlenditRevertToCommit(Operator):
 
         latestCommit = repo[repo.head.target]
         revertCommit = repo.get(self.id)
-        if latestCommit.hex == revertCommit.hex:
+        if str(latestCommit.id) == str(revertCommit.id):
             return {'CANCELLED'}
 
         """
@@ -106,9 +106,9 @@ class BlenditRevertToCommit(Operator):
             
             A <-- B <-- C <-- D <-- A'     <-- master <-- HEAD
         """
-        repo.reset(revertCommit.oid, GIT_RESET_HARD)
-        repo.reset(latestCommit.oid, GIT_RESET_SOFT)
-        gitHelpers.commit(repo, f"Reverted to commit: {revertCommit.hex[:7]}")
+        repo.reset(revertCommit.id, GIT_RESET_HARD)
+        repo.reset(latestCommit.id, GIT_RESET_SOFT)
+        gitHelpers.commit(repo, f"Reverted to commit: {str(revertCommit.id)[:7]}")
 
         # Regen file
         openProject.regenFile(filepath, filename)
